@@ -5,9 +5,14 @@ import com.example.homework2_7collections2.employee.Employee;
 import java.util.Collection;
 
 public interface EmployeeService {
-    Employee add(String firstName, String lastName);
-    Employee remove(String firstName, String lastName);
-    Employee find(String firstName, String lastName);
+    abstract Employee addEmployee(String firstName, String lastName);
 
-    Collection<Employee> showEmployeeList();
+    void addEmployee(Employee employee);
+
+    void removeEmployee(String firstName, String lastName);
+
+    Employee findEmployee(String firstName, String lastName);
+
+    Collection<Employee> showEmployees();
+    Collection<Employee> getAllEmployees();
 }

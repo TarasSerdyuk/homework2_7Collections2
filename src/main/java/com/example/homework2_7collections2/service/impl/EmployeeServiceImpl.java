@@ -1,59 +1,59 @@
 package com.example.homework2_7collections2.service.impl;
 
 import com.example.homework2_7collections2.service.EmployeeService;
-
 import com.example.homework2_7collections2.employee.Employee;
 import com.example.homework2_7collections2.exception.EmployeeAlreadyAddedException;
 import com.example.homework2_7collections2.exception.EmployeeNotFoundException;
-import com.example.homework2_7collections2.exception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
-    private final List<Employee> employeeList;
-    static int maxCount = 10;
-
+public class EmployeeServiceImpl implements EmployeeService{
+    private final Map<String, Employee> employeesMap;
     public EmployeeServiceImpl() {
-        this.employeeList = new ArrayList<>();
+        this.employeesMap = new HashMap<>();
     }
     @Override
-    public Employee add(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (employeeList.size() >= maxCount) {
-            throw new EmployeeStorageIsFullException();
-        } else if (employeeList.contains(employee)) {
-            throw new EmployeeAlreadyAddedException();
-        }
-        employeeList.add(employee);
-        return employee;
-    }
+    public Employee addEmployee(String firstName, String lastName) {
 
-    @Override
-    public Employee remove(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (!employeeList.contains(employee)) {
-            throw new EmployeeNotFoundException();
-        }
-        employeeList.remove(employee);
-        return employee;
-    }
+        Employee employee = new Employee(firstName,lastName);
 
-    @Override
-    public Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (!employeeList.contains(employee)) {
-            throw new EmployeeNotFoundException();
+        if (employeesMap.containsKey(employee.getFullName())) {
+            throw new EmployeeAlreadyAddedException("Сотрудник уже добавлен");
         }
         return employee;
     }
 
+
     @Override
-    public Collection<Employee> showEmployeeList() {
-        return Collections.unmodifiableList(employeeList);
+    public void addEmployee(Employee employee) {
+
+    }
+
+    @Override
+    public void removeEmployee(String firstName, String lastName) {
+        if (!employeesMap.containsKey(firstName + lastName)) {
+            throw new EmployeeNotFoundException("Нет такого сотрудника");
+        }
+        employeesMap.remove(firstName + lastName);
+    }
+
+    @Override
+    public Employee findEmployee(String firstName, String lastName) {
+        if (!employeesMap.containsKey(firstName + lastName)) {
+            throw new EmployeeNotFoundException("Нет такого сотрудника");
+        }
+        return employeesMap.get(firstName + lastName);
+    }
+
+    @Override
+    public Collection<Employee> showEmployees() {
+        return Collections.unmodifiableCollection(employeesMap.values());
+    }
+
+    @Override
+    public Collection<Employee> getAllEmployees() {
+        return null;
     }
 }
