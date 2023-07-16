@@ -20,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         Employee employee = new Employee(firstName,lastName);
 
         if (employeesMap.containsKey(employee.getFullName())) {
-            throw new EmployeeAlreadyAddedException("Сотрудник уже добавлен");
+            throw new EmployeeAlreadyAddedException("Такой сотрудник уже добавлен");
         }
         return employee;
     }
