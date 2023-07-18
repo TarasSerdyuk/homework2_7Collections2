@@ -5,7 +5,6 @@ import com.example.homework2_7collections2.employee.Employee;
 import java.util.Collection;
 
 public interface EmployeeService {
-    abstract Employee addEmployee(String firstName, String lastName);
 
     void addEmployee(Employee employee);
 
