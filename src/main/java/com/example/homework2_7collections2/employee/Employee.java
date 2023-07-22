@@ -6,11 +6,11 @@ public class Employee {
     private Integer salary;
     private Integer department;
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, Integer salary, Integer department) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.salary = salary;
-        this.department = department;
+        this.salary = this.salary;
+        this.department = this.department;
     }
 
     public String getFullName() {
