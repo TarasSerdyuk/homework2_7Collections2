@@ -36,7 +36,7 @@ public class EmployeeServiceTest {
     public void shouldRemoveEmployeeWhenItDoesntExist() {
         Employee employee = new Employee("Ivan", "Serduyk", 5000, 1);
         employeeService.addEmployee(employee);
-        employeeService.removeEmployee("Ivan", "Ivanov");
+        employeeService.removeEmployee("Ivan", "Serduyk");
 
         Assertions.assertFalse(employeeService.getAllEmployees().contains(employee));
     }
@@ -45,13 +45,13 @@ public class EmployeeServiceTest {
     public void shouldThrowExceptionWhenEmployeeDoesntExistsWhileRemove() {
 
         Assertions.assertThrows(EmployeeNotFoundException.class, () ->
-                employeeService.removeEmployee("Ivan", "Ivanov"));
+                employeeService.removeEmployee("Ivan", "Serduyk"));
     }
 
     @Test
     public void shouldThrowExceptionWhenEmployeeDoesntExistsWhileFind() {
 
         Assertions.assertThrows(EmployeeNotFoundException.class, () ->
-                employeeService.findEmployee("Ivan", "Ivanov"));
+                employeeService.findEmployee("Ivan", "Serduyk"));
     }
 }

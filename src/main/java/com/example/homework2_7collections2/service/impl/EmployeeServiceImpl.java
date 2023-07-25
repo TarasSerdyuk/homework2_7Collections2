@@ -60,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Collection<Employee> getAllEmployees() {
-        return null;
+        return employeesMap.values();
     }
     private void validate(String... names) {
         for (String name : names) {
